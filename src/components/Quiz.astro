@@ -1,0 +1,95 @@
+---
+import kviz from '../data/kviz.json';
+
+const items = kviz.items ?? [];
+---
+{items.length === 0 ? (
+  <div class="empty">Zatím zde nejsou žádné otázky – brzy je doplníme.</div>
+) : (
+  <form class="quiz" data-quiz>
+    {items.map((q, qi) => {
+      const correct = q.moznosti.findIndex((o) => o.spravna);
+      return (
+        <fieldset class="quiz__q" data-correct={correct}>
+          <legend>
+            {qi + 1}. {q.otazka}
+          </legend>
+          {q.moznosti.map((o, oi) => (
+            <label class="quiz__opt">
+              <input type="radio" name={`q${qi}`} value={oi} />
+              <span>{o.text}</span>
+            </label>
+          ))}
+          {q.vysvetleni ? <p class="quiz__explain" hidden>{q.vysvetleni}</p> : null}
+        </fieldset>
+      );
+    })}
+    <div class="quiz__actions">
+      <button type="submit" class="btn btn--primary">Vyhodnotit</button>
+      <button type="button" class="btn btn--ghost" data-reset hidden>Zkusit znovu</button>
+    </div>
+    <p class="quiz__result" role="status" aria-live="polite" hidden></p>
+  </form>
+)}
+<script>
+  const form = document.querySelector('[data-quiz]');
+  if (form) {
+    const reset = form.querySelector('[data-reset]');
+    const result = form.querySelector('.quiz__result');
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const questions = Array.from(form.querySelectorAll('.quiz__q'));
+      let score = 0;
+
+      questions.forEach((fs) => {
+        const correct = Number(fs.getAttribute('data-correct'));
+        const options = Array.from(fs.querySelectorAll('.quiz__opt'));
+        options.forEach((o) => o.classList.remove('is-correct', 'is-wrong'));
+        fs.classList.remove('is-correct', 'is-wrong');
+
+        const chosen = fs.querySelector('input:checked');
+        if (chosen) {
+          const idx = Number(chosen.value);
+          if (idx === correct) {
+            score += 1;
+            fs.classList.add('is-correct');
+            if (options[correct]) options[correct].classList.add('is-correct');
+          } else {
+            fs.classList.add('is-wrong');
+            if (options[idx]) options[idx].classList.add('is-wrong');
+            if (options[correct]) options[correct].classList.add('is-correct');
+          }
+        } else if (options[correct]) {
+          options[correct].classList.add('is-correct');
+        }
+
+        const explain = fs.querySelector('.quiz__explain');
+        if (explain) explain.removeAttribute('hidden');
+      });
+
+      if (result) {
+        result.removeAttribute('hidden');
+        result.textContent = `Výsledek: ${score} z ${questions.length} správně.`;
+      }
+      if (reset) reset.removeAttribute('hidden');
+    });
+
+    if (reset) {
+      reset.addEventListener('click', () => {
+        form.reset();
+        form.querySelectorAll('.quiz__q').forEach((fs) => {
+          fs.classList.remove('is-correct', 'is-wrong');
+          fs.querySelectorAll('.quiz__opt').forEach((o) => o.classList.remove('is-correct', 'is-wrong'));
+          const explain = fs.querySelector('.quiz__explain');
+          if (explain) explain.setAttribute('hidden', '');
+        });
+        if (result) {
+          result.setAttribute('hidden', '');
+          result.textContent = '';
+        }
+        reset.setAttribute('hidden', '');
+      });
+    }
+  }
+</script>

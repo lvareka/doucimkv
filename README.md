@@ -2,8 +2,9 @@
 
 Nová verze webu `doucimkv.wz.cz` postavená na **Astro** + **Sveltia CMS** (nástupce
 Decap CMS) + **Netlify**. Web je **hotový**: moderní responzivní design, plný obsah
-(Úvod, Forma doučování, Ceník, Pravidla, FAQ, Kontakt), formuláře (Netlify Forms),
-FAQ a SEO (sitemap, JSON-LD, meta). Obsah lze pohodlně upravovat v prohlížeči přes CMS.
+(Úvod, Forma doučování, Ceník, Kvíz, Pravidla, FAQ, Kontakt), interaktivní kvíz
+s příklady a zajímavostmi, formuláře (Netlify Forms), FAQ a SEO (sitemap, JSON-LD, meta).
+Obsah lze pohodlně upravovat v prohlížeči přes CMS.
 
 ## Je to zdarma?
 
@@ -123,7 +124,7 @@ public/favicon.svg
 src/styles/global.css   # design systém
 src/layouts/            # BaseLayout.astro (hlavička, patička, <head>, JSON-LD)
 src/components/         # Header, Footer, Cta
-src/pages/              # index, forma, cenik, pravidla, faq, kontakt, dekujeme
+src/pages/              # index, forma, cenik, kviz, pravidla, faq, kontakt, dekujeme
 src/content/pages/*.md  # editovatelné texty stránek (CMS)
-src/data/*.json         # kontakt/ceny, FAQ, aktuality (CMS)
+src/data/*.json         # kontakt/ceny, FAQ, aktuality, kvíz, příklady, zajímavosti (CMS)
 ```

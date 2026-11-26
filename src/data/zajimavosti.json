@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "titulek": "Proč je 0! = 1?",
+      "text": "Faktoriál nuly je definován jako 1, aby platila pravidla kombinatoriky – počet způsobů, jak uspořádat prázdnou množinu, je právě jeden."
+    },
+    {
+      "titulek": "Nekonečno není číslo",
+      "text": "Symbol ∞ označuje nekonečno, ale v běžné aritmetice to není číslo – nelze s ním počítat jako s ostatními čísly."
+    },
+    {
+      "titulek": "Zlatý řez",
+      "text": "Poměr zlatého řezu (φ ≈ 1,618) se objevuje v geometrii, umění i přírodě."
+    }
+  ]
+}

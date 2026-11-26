@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Cta from '../components/Cta.astro';
+import Quiz from '../components/Quiz.astro';
+import priklady from '../data/priklady.json';
+import zajimavosti from '../data/zajimavosti.json';
+
+const examples = priklady.items ?? [];
+const facts = zajimavosti.items ?? [];
+---
+<BaseLayout
+  title="Matematický kvíz, příklady a zajímavosti | Karlovy Vary"
+  description="Interaktivní matematický kvíz, příklady s řešením a zajímavosti z matematiky. Procvičte si matematiku zábavnou formou."
+>
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Procvičování</p>
+        <h1>Kvíz, příklady a zajímavosti</h1>
+        <p class="lead">Otestujte se, projděte si příklady s řešením a přečtěte si zajímavosti z matematiky.</p>
+      </div>
+      <nav class="anchors" aria-label="Sekce stránky">
+        <a href="#kviz">Kvíz</a>
+        <a href="#priklady">Příklady</a>
+        <a href="#zajimavosti">Zajímavosti</a>
+      </nav>
+    </div>
+  </section>
+
+  <section class="section section--tight" id="kviz">
+    <div class="container">
+      <h2>Kvíz</h2>
+      <Quiz />
+    </div>
+  </section>
+
+  <section class="section section--tight" id="priklady" style="background:#fff;border-block:1px solid var(--line)">
+    <div class="container">
+      <h2>Příklady s řešením</h2>
+      {examples.length === 0 ? (
+        <div class="empty">Zatím zde nejsou žádné příklady – brzy je doplníme.</div>
+      ) : (
+        <div class="examples">
+          {examples.map((e) => (
+            <article class="example">
+              {e.tema ? <span class="example__topic">{e.tema}</span> : null}
+              <p class="example__q">{e.zadani}</p>
+              <details>
+                <summary>Zobrazit řešení</summary>
+                <div class="example__solution">{e.reseni}</div>
+              </details>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="section section--tight" id="zajimavosti">
+    <div class="container">
+      <h2>Zajímavosti</h2>
+      {facts.length === 0 ? (
+        <div class="empty">Zatím zde nejsou žádné zajímavosti – brzy je doplníme.</div>
+      ) : (
+        <div class="facts">
+          {facts.map((f) => (
+            <article class="fact">
+              <h3>{f.titulek}</h3>
+              <p>{f.text}</p>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <Cta title="Chcete doučování na míru?" text="Kvíz a příklady jsou jen začátek – domluvte si individuální hodinu." />
+</BaseLayout>

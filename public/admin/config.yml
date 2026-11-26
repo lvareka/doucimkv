@@ -104,3 +104,55 @@ collections:
               - { name: titulek, label: "Titulek", widget: string }
               - { name: text, label: "Text", widget: text }
               - { name: zobrazit, label: "Zobrazit na webu", widget: boolean, default: true }
+
+  - name: kviz
+    label: "Kvíz"
+    files:
+      - name: kviz
+        label: "Otázky kvízu"
+        file: "src/data/kviz.json"
+        fields:
+          - name: items
+            label: "Otázky"
+            widget: list
+            summary: "{{fields.otazka}}"
+            fields:
+              - { name: otazka, label: "Otázka", widget: string }
+              - name: moznosti
+                label: "Možnosti odpovědí"
+                widget: list
+                fields:
+                  - { name: text, label: "Odpověď", widget: string }
+                  - { name: spravna, label: "Správná odpověď", widget: boolean, default: false }
+              - { name: vysvetleni, label: "Vysvětlení (nepovinné)", widget: text, required: false }
+
+  - name: priklady
+    label: "Příklady"
+    files:
+      - name: priklady
+        label: "Příklady s řešením"
+        file: "src/data/priklady.json"
+        fields:
+          - name: items
+            label: "Příklady"
+            widget: list
+            summary: "{{fields.zadani}}"
+            fields:
+              - { name: tema, label: "Téma (nepovinné)", widget: string, required: false }
+              - { name: zadani, label: "Zadání", widget: text }
+              - { name: reseni, label: "Řešení", widget: text }
+
+  - name: zajimavosti
+    label: "Zajímavosti"
+    files:
+      - name: zajimavosti
+        label: "Zajímavosti"
+        file: "src/data/zajimavosti.json"
+        fields:
+          - name: items
+            label: "Zajímavosti"
+            widget: list
+            summary: "{{fields.titulek}}"
+            fields:
+              - { name: titulek, label: "Titulek", widget: string }
+              - { name: text, label: "Text", widget: text }

@@ -1,0 +1,31 @@
+{
+  "items": [
+    {
+      "otazka": "Kolik je 7 × 8?",
+      "moznosti": [
+        { "text": "54", "spravna": false },
+        { "text": "56", "spravna": true },
+        { "text": "58", "spravna": false }
+      ],
+      "vysvetleni": "7 × 8 = 56 (malá násobilka)."
+    },
+    {
+      "otazka": "Jaká je hodnota 2³ (dvě na třetí)?",
+      "moznosti": [
+        { "text": "6", "spravna": false },
+        { "text": "8", "spravna": true },
+        { "text": "9", "spravna": false }
+      ],
+      "vysvetleni": "2³ = 2 · 2 · 2 = 8."
+    },
+    {
+      "otazka": "Které z čísel je prvočíslo?",
+      "moznosti": [
+        { "text": "21", "spravna": false },
+        { "text": "27", "spravna": false },
+        { "text": "29", "spravna": true }
+      ],
+      "vysvetleni": "29 je prvočíslo (21 = 3 · 7, 27 = 3 · 9)."
+    }
+  ]
+}

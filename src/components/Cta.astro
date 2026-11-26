@@ -1,0 +1,22 @@
+---
+interface Props {
+  title?: string;
+  text?: string;
+}
+const {
+  title = 'Domluvme se na termínu',
+  text = 'Zavolejte, napište e-mail, nebo vyplňte rezervační formulář. Ozvu se vám co nejdříve.',
+} = Astro.props;
+---
+<section class="section">
+  <div class="container">
+    <div class="cta">
+      <h2>{title}</h2>
+      <p>{text}</p>
+      <div class="cta__actions">
+        <a class="btn btn--primary" href="/kontakt#rezervace">Rezervovat termín</a>
+        <a class="btn btn--ghost" href="tel:+420774195713">Zavolat 774 195 713</a>
+      </div>
+    </div>
+  </div>
+</section>

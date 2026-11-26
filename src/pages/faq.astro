@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Cta from '../components/Cta.astro';
+import faq from '../data/faq.json';
+
+const items = faq.items ?? [];
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map((f) => ({
+    '@type': 'Question',
+    name: f.otazka,
+    acceptedAnswer: { '@type': 'Answer', text: f.odpoved },
+  })),
+};
+---
+<BaseLayout
+  title="Časté dotazy (FAQ) – Doučování matematiky a fyziky Karlovy Vary"
+  description="Odpovědi na časté otázky o doučování matematiky a fyziky v Karlových Varech – průběh, ceny, forma výuky a domlouvání termínů."
+  schema={[faqSchema]}
+>
+  <section class="section">
+    <div class="container">
+      <div class="section-head center">
+        <p class="eyebrow">Časté dotazy</p>
+        <h1>Časté dotazy</h1>
+        <p class="lead">Nenašli jste odpověď? <a href="/kontakt">Napište mi</a> nebo zavolejte na 774 195 713.</p>
+      </div>
+      <div class="faq">
+        {items.map((f) => (
+          <details>
+            <summary>{f.otazka}</summary>
+            <div class="faq__answer">{f.odpoved}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+  <Cta />
+</BaseLayout>

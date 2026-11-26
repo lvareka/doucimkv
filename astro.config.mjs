@@ -1,7 +1,8 @@
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
-// Po vytvoření Netlify webu změň `site` na skutečnou adresu
-// (používá se pro canonical URL a sitemap).
+// TODO: po nasazení nahraď adresou skutečného webu (subdoména Netlify / vlastní doména).
 export default defineConfig({
   site: 'https://doucimkv.netlify.app',
+  integrations: [sitemap()],
 });

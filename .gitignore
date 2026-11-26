@@ -5,6 +5,9 @@ node_modules/
 dist/
 .astro/
 
+# Local tooling (portable Node used for build/test)
+.tools/
+
 # Env
 .env
 .env.*

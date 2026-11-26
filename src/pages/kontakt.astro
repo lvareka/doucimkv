@@ -1,0 +1,139 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import nastaveni from '../data/nastaveni.json';
+import { getEntry, render } from 'astro:content';
+
+const entry = (await getEntry('pages', 'kontakt'))!;
+const { Content } = await render(entry);
+
+const mapQuery = encodeURIComponent('Konečná 897/9, 360 05 Karlovy Vary');
+---
+<BaseLayout title={entry.data.title} description={entry.data.description}>
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Spojte se se mnou</p>
+        <h1>Kontakt</h1>
+      </div>
+
+      <div class="grid grid--2" style="align-items:start">
+        <div class="prose" style="max-width:none"><Content /></div>
+
+        <ul class="contact-list">
+          <li>
+            <span class="ico" aria-hidden="true">☎</span>
+            <span><strong>Telefon</strong><a href={`tel:+420${nastaveni.telefon.replace(/\s/g, '')}`}>{nastaveni.telefon}</a><br /><span class="muted" style="font-size:.85rem">Když mám vypnutý telefon, nepište SMS – pošlete e-mail.</span></span>
+          </li>
+          <li>
+            <span class="ico" aria-hidden="true">✉</span>
+            <span><strong>E-mail</strong><a href={`mailto:${nastaveni.email}`}>{nastaveni.email}</a></span>
+          </li>
+          <li>
+            <span class="ico" aria-hidden="true">⌖</span>
+            <span><strong>Adresa</strong>{nastaveni.adresa}<br /><a href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`} target="_blank" rel="noopener">Zobrazit na mapě</a></span>
+          </li>
+          <li>
+            <span class="ico" aria-hidden="true">₳</span>
+            <span><strong>Platby (distančně)</strong>{nastaveni.ucet}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="rezervace" style="background:#fff;border-block:1px solid var(--line)">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Nezávazně</p>
+        <h2>Rezervace termínu</h2>
+        <p class="lead">Vyplňte formulář a ozvu se vám s návrhem termínu.</p>
+      </div>
+      <form class="form" name="rezervace" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/dekujeme">
+        <input type="hidden" name="form-name" value="rezervace" />
+        <p class="hp" aria-hidden="true">
+          <label>Nevyplňujte: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+        </p>
+        <div class="form__row">
+          <div class="field">
+            <label for="r-jmeno">Jméno a příjmení *</label>
+            <input id="r-jmeno" name="jmeno" type="text" required autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="r-kontakt">Telefon nebo e-mail *</label>
+            <input id="r-kontakt" name="kontakt" type="text" required autocomplete="off" />
+          </div>
+        </div>
+        <div class="form__row">
+          <div class="field">
+            <label for="r-predmet">Předmět</label>
+            <select id="r-predmet" name="predmet">
+              <option>Matematika</option>
+              <option>Fyzika</option>
+              <option>Matematika i fyzika</option>
+              <option>Jiné</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="r-uroven">Úroveň</label>
+            <select id="r-uroven" name="uroven">
+              <option>Základní škola</option>
+              <option>Střední škola</option>
+              <option>Vysoká škola</option>
+              <option>Maturita / reparát</option>
+              <option>Jiné</option>
+            </select>
+          </div>
+        </div>
+        <div class="form__row">
+          <div class="field">
+            <label for="r-forma">Forma výuky</label>
+            <select id="r-forma" name="forma">
+              <option>Prezenčně v Karlových Varech</option>
+              <option>Distančně ({nastaveni.distancni_nastroj})</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="r-termin">Preferovaný termín</label>
+            <input id="r-termin" name="termin" type="text" placeholder="např. úterý odpoledne" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="r-zprava">S čím potřebujete pomoci?</label>
+          <textarea id="r-zprava" name="zprava" placeholder="Krátce popište téma nebo typ příkladů…"></textarea>
+        </div>
+        <button class="btn btn--primary" type="submit">Odeslat rezervaci</button>
+        <p class="form__note">Odesláním souhlasíte se zpracováním údajů za účelem domluvení termínu. Údaje nejsou předávány třetím stranám.</p>
+      </form>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Krátká zpráva</p>
+        <h2>Napište mi</h2>
+      </div>
+      <form class="form" name="kontakt" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/dekujeme">
+        <input type="hidden" name="form-name" value="kontakt" />
+        <p class="hp" aria-hidden="true">
+          <label>Nevyplňujte: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+        </p>
+        <div class="form__row">
+          <div class="field">
+            <label for="k-jmeno">Jméno</label>
+            <input id="k-jmeno" name="jmeno" type="text" required autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="k-email">E-mail *</label>
+            <input id="k-email" name="email" type="email" required autocomplete="email" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="k-zprava">Zpráva *</label>
+          <textarea id="k-zprava" name="zprava" required></textarea>
+        </div>
+        <button class="btn btn--primary" type="submit">Odeslat zprávu</button>
+      </form>
+    </div>
+  </section>
+</BaseLayout>

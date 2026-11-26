@@ -3,20 +3,16 @@ title: "Pravidla vzájemné komunikace | Doučování Karlovy Vary"
 description: "Pravidla domlouvání a odvolávání hodin, platby a zodpovídání dotazů při doučování matematiky a fyziky."
 ---
 
-## Pravidla vzájemné komunikace
+## Prezenční doučování
 
-### Prezenční doučování
+V dosahu MHD a příměstské dopravy Karlovy Vary docházím k vám, případně učím doma. Domluvené doučování lze odvolat pokud možno alespoň den předem. Za neomluvenou absenci se při příští hodině doplácí celá hodina dle ceníku.
 
-V dosahu MHD a příměstské dopravy Karlovy Vary docházím, případně učím doma.
-Domluvené doučování lze odvolat pokud možno alespoň den předem. Za neomluvenou
-absenci se při příští hodině doplácí celá hodina dle ceníku.
+Platbu prosím připravte v hotovosti, odpočítanou – na velké bankovky nemusím mít nazpět.
 
-Připravte si prosím platbu odpočítanou.
+## Distanční doučování
 
-### Distanční doučování
+Platba za distanční lekce probíhá bezhotovostně na účet **1273074026/3030**.
 
-Platba probíhá bezhotovostně na účet uvedený v kontaktu.
+## Zodpovídání dotazů
 
-### Dotazy
-
-Máte-li naléhavý dotaz, který nelze vyřešit telefonicky, napište e-mail.
+Máte-li naléhavý dotaz (např. odborné povahy), který nelze vyřešit telefonicky, napište e-mail na petrvareka@seznam.cz, případně použijte kontaktní formulář.

@@ -25,7 +25,7 @@ collections:
     files:
       - name: site
         label: "Kontakt a ceny"
-        file: "src/content/nastaveni.json"
+        file: "src/data/nastaveni.json"
         fields:
           - { name: jmeno, label: "Jméno a titul", widget: string }
           - { name: telefon, label: "Telefon", widget: string }
@@ -80,7 +80,7 @@ collections:
     files:
       - name: faq
         label: "Otázky a odpovědi"
-        file: "src/content/faq.json"
+        file: "src/data/faq.json"
         fields:
           - name: items
             label: "Otázky"
@@ -94,7 +94,7 @@ collections:
     files:
       - name: aktuality
         label: "Oznámení"
-        file: "src/content/aktuality.json"
+        file: "src/data/aktuality.json"
         fields:
           - name: items
             label: "Oznámení"

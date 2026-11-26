@@ -1,23 +1,145 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Cta from '../components/Cta.astro';
+import { getEntry, render } from 'astro:content';
+import nastaveni from '../data/nastaveni.json';
+import faq from '../data/faq.json';
+import aktuality from '../data/aktuality.json';
+
+const uvod = (await getEntry('pages', 'uvod'))!;
+const { Content: UvodContent } = await render(uvod);
+
+const faqItems = faq.items ?? [];
+const news = (aktuality.items ?? []).filter((n) => n.zobrazit !== false);
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((f) => ({
+    '@type': 'Question',
+    name: f.otazka,
+    acceptedAnswer: { '@type': 'Answer', text: f.odpoved },
+  })),
+};
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: 'Doučování matematiky a fyziky',
+  provider: { '@type': 'Person', name: 'Petr Vařeka' },
+  areaServed: { '@type': 'City', name: 'Karlovy Vary' },
+  offers: [
+    { '@type': 'Offer', name: 'Prezenční doučování', price: String(nastaveni.cena_prezencni), priceCurrency: 'CZK' },
+    { '@type': 'Offer', name: 'Distanční doučování', price: String(nastaveni.cena_distancni), priceCurrency: 'CZK' },
+  ],
+};
+
+const services = [
+  { icon: '∑', title: 'Matematika (ZŠ a SŠ)', text: 'Algebra, geometrie, funkce, rovnice a vše, co je potřeba zvládnout.' },
+  { icon: 'Φ', title: 'Fyzika (ZŠ a SŠ)', text: 'Mechanika, elektřina, optika – s důrazem na pochopení zákonitostí.' },
+  { icon: '∫', title: 'Vysoká škola', text: 'Matematická analýza, lineární algebra, statistika a technické předměty.' },
+  { icon: '√x', title: 'Maturita a reparát', text: 'Cílená příprava na písemnou zkoušku a opravné termíny.' },
+  { icon: '⇄', title: 'Distanční výuka', text: 'Online přes ' + nastaveni.distancni_nastroj + ' odkudkoli – výklad i rozbor příkladů.' },
+  { icon: 'ƒ(x)', title: 'Příklady na zakázku', text: 'Komentované vyřešení zadaných úloh s vysvětlením postupu.' },
+];
 ---
-<BaseLayout>
-  <main style="max-width:720px;margin:4rem auto;padding:0 1.25rem;font-family:system-ui,sans-serif;line-height:1.65;color:#1f2937">
-    <h1 style="line-height:1.2">Doučování matematiky a fyziky — Karlovy Vary</h1>
-    <p>
-      <strong>RNDr. Petr Vařeka</strong> · absolvent Matematicko-fyzikální fakulty UK · 15+ let praxe.
-    </p>
-    <p>
-      Prezenčně v Karlových Varech (300 Kč / hod) i distančně přes WhatsApp (350 Kč / hod).
-      Matematika a fyzika pro základní, střední i vysoké školy, příprava na maturitu a reparát,
-      počítání příkladů na zakázku.
-    </p>
-    <p>
-      <a href="mailto:petrvareka@seznam.cz">petrvareka@seznam.cz</a> · 774 195 713
-    </p>
-    <hr style="margin:2rem 0;border:none;border-top:1px solid #e5e7eb" />
-    <p style="color:#6b7280;font-size:.9rem">
-      Ukázkový skeleton – plný design a obsah bude doplněn ve fázi implementace.
-    </p>
-  </main>
+<BaseLayout schema={[faqSchema, serviceSchema]}>
+  <section class="hero">
+    <div class="container hero__grid">
+      <div>
+        <p class="eyebrow">Matematika &amp; fyzika · Karlovy Vary</p>
+        <h1>Doučování matematiky a fyziky v Karlových Varech</h1>
+        <p class="lead">
+          Individuální doučování pro ZŠ, SŠ i VŠ, příprava na maturitu a reparát a počítání příkladů
+          na zakázku. Absolvent MFF UK s více než 15 lety praxe – trpělivě a srozumitelně.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="/kontakt#rezervace">Rezervovat termín</a>
+          <a class="btn btn--ghost" href="/cenik">Zobrazit ceník</a>
+        </div>
+        <div class="hero__badges">
+          <span class="badge">✓ 15+ let praxe</span>
+          <span class="badge">✓ Absolvent MFF UK</span>
+          <span class="badge">✓ Prezenčně i online</span>
+        </div>
+      </div>
+      <aside class="hero__card">
+        <h2 style="font-size:1.15rem">Ceny za doučování</h2>
+        <div class="price-row">
+          <span>Prezenčně (Karlovy Vary)</span>
+          <strong>{nastaveni.cena_prezencni} Kč</strong>
+        </div>
+        <div class="price-row">
+          <span>Distančně ({nastaveni.distancni_nastroj})</span>
+          <strong>{nastaveni.cena_distancni} Kč</strong>
+        </div>
+        <p class="muted" style="font-size:.85rem;margin:.9rem 0 0">Cena za 60 minut. Poměrná část za započatou hodinu.</p>
+        <a class="btn btn--primary btn--block" style="margin-top:1rem" href="/kontakt#rezervace">Domluvit hodinu</a>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head center">
+        <p class="eyebrow">Nabídka</p>
+        <h2>Co nabízím</h2>
+        <p class="lead">Od pochopení základů po přípravu na zkoušky – podle vašich potřeb.</p>
+      </div>
+      <div class="grid grid--3">
+        {services.map((s) => (
+          <article class="card">
+            <div class="card__icon" aria-hidden="true">{s.icon}</div>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:#fff;border-block:1px solid var(--line)">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">O doučování</p></div>
+      <div class="prose"><UvodContent /></div>
+    </div>
+  </section>
+
+  {news.length > 0 && (
+    <section class="section section--tight">
+      <div class="container">
+        <div class="section-head"><p class="eyebrow">Aktuality</p></div>
+        <div class="news">
+          {news.map((n) => (
+            <div class="news__item">
+              <div class="news__date">{n.datum}</div>
+              <strong>{n.titulek}</strong>
+              <p style="margin:.25rem 0 0">{n.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {faqItems.length > 0 && (
+    <section class="section" style="background:#fff;border-block:1px solid var(--line)">
+      <div class="container">
+        <div class="section-head center">
+          <p class="eyebrow">Časté dotazy</p>
+          <h2>Na co se nejčastěji ptáte</h2>
+        </div>
+        <div class="faq">
+          {faqItems.map((f) => (
+            <details>
+              <summary>{f.otazka}</summary>
+              <div class="faq__answer">{f.odpoved}</div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <Cta />
 </BaseLayout>

@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Cta from '../components/Cta.astro';
+import nastaveni from '../data/nastaveni.json';
+import { getEntry, render } from 'astro:content';
+
+const entry = (await getEntry('pages', 'cenik'))!;
+const { Content } = await render(entry);
+---
+<BaseLayout title={entry.data.title} description={entry.data.description}>
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Ceník</p>
+        <h1>Ceník doučování</h1>
+      </div>
+      <div class="pricing" style="margin-bottom:2.2rem">
+        <div class="plan">
+          <span class="plan__label">Prezenčně · Karlovy Vary</span>
+          <div class="plan__price">{nastaveni.cena_prezencni} Kč <small>/ 60 min</small></div>
+          <p class="muted">Výuka u vás doma nebo u mě, v dosahu MHD Karlovy Vary a příměstské dopravy.</p>
+        </div>
+        <div class="plan plan--featured">
+          <span class="plan__label">Distančně · {nastaveni.distancni_nastroj}</span>
+          <div class="plan__price">{nastaveni.cena_distancni} Kč <small>/ 60 min</small></div>
+          <p class="muted">Online výuka odkudkoli – výklad na tabuli i rozbor zaslaných příkladů.</p>
+        </div>
+      </div>
+      <div class="prose"><Content /></div>
+    </div>
+  </section>
+  <Cta />
+</BaseLayout>

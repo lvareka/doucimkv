@@ -1,29 +1,81 @@
 ---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
 interface Props {
   title?: string;
   description?: string;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+  noindex?: boolean;
 }
+
 const {
-  title = 'Doučování matematiky a fyziky – Karlovy Vary',
-  description = 'Doučování matematiky a fyziky (ZŠ, SŠ, VŠ) v Karlových Varech a online. RNDr. Petr Vařeka, absolvent MFF UK, 15+ let praxe.',
+  title = 'Doučování matematiky a fyziky – Karlovy Vary | RNDr. Petr Vařeka',
+  description = 'Doučování matematiky a fyziky (ZŠ, SŠ, VŠ) v Karlových Varech a online. Absolvent MFF UK, 15+ let praxe. Prezenčně 300 Kč/hod, distančně 350 Kč/hod.',
+  schema = [],
+  noindex = false,
 } = Astro.props;
+
+const siteUrl = Astro.site ?? new URL('https://doucimkv.netlify.app');
+const canonical = new URL(Astro.url.pathname, siteUrl).href;
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'EducationalOrganization',
+  name: 'Doučování matematiky a fyziky – RNDr. Petr Vařeka',
+  url: siteUrl.href,
+  email: 'petrvareka@seznam.cz',
+  telephone: '+420774195713',
+  areaServed: { '@type': 'City', name: 'Karlovy Vary' },
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Konečná 897/9',
+    addressLocality: 'Karlovy Vary',
+    postalCode: '360 05',
+    addressCountry: 'CZ',
+  },
+  founder: {
+    '@type': 'Person',
+    name: 'Petr Vařeka',
+    jobTitle: 'Lektor matematiky a fyziky',
+    alumniOf: 'Matematicko-fyzikální fakulta Univerzity Karlovy',
+  },
+};
+
+const passed = Array.isArray(schema) ? schema : [schema];
+const schemas = [orgSchema, ...passed].filter(Boolean);
 ---
 <!doctype html>
 <html lang="cs">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    {/* SKELETON: noindex, dokud web není hotový – při spuštění odstranit */}
-    <meta name="robots" content="noindex" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    {noindex ? <meta name="robots" content="noindex" /> : <meta name="robots" content="index, follow" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#0f766e" />
     <meta property="og:locale" content="cs_CZ" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Doučování matematiky a fyziky – Karlovy Vary" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {schemas.map((s) => (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(s)}></script>
+    ))}
   </head>
   <body>
-    <slot />
+    <a class="skip-link" href="#obsah">Přeskočit na obsah</a>
+    <Header />
+    <main id="obsah">
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>

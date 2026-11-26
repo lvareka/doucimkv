@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Cta from '../components/Cta.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = (await getEntry('pages', 'pravidla'))!;
+const { Content } = await render(entry);
+---
+<BaseLayout title={entry.data.title} description={entry.data.description}>
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Aby vše fungovalo</p>
+        <h1>Pravidla vzájemné komunikace</h1>
+      </div>
+      <div class="prose"><Content /></div>
+    </div>
+  </section>
+  <Cta title="Máte dotaz?" text="Nejrychlejší je zavolat. Pokud mám vypnutý telefon, napište e-mail." />
+</BaseLayout>

@@ -1,9 +1,9 @@
 # Doučování matematiky a fyziky – Karlovy Vary (moderní web)
 
 Nová verze webu `doucimkv.wz.cz` postavená na **Astro** + **Sveltia CMS** (nástupce
-Decap CMS) + **Netlify**. Tento repozitář je *skeleton připravený k nasazení* –
-obsahuje funkční pipeline (GitHub → Netlify), CMS a obsahový model; plný design a
-rozšířený obsah se doplní v další fázi.
+Decap CMS) + **Netlify**. Web je **hotový**: moderní responzivní design, plný obsah
+(Úvod, Forma doučování, Ceník, Pravidla, FAQ, Kontakt), formuláře (Netlify Forms),
+FAQ a SEO (sitemap, JSON-LD, meta). Obsah lze pohodlně upravovat v prohlížeči přes CMS.
 
 ## Je to zdarma?
 
@@ -23,8 +23,8 @@ rozšířený obsah se doplní v další fázi.
 - **Node.js 20+** a npm (stačí jednorázově nainstalovat z nodejs.org)
 - Git
 
-> V tomto prostředí nebyl Node v shellu dostupný, proto první build proběhne až na
-> Netlify. Projekt je triviální Astro aplikace – riziko selhání buildu je minimální.
+> Build byl lokálně ověřen (Astro 5, Node 22 LTS) a web se korektně sestaví i na
+> Netlify. Pro lokální vývoj stačí doinstalovat Node z nodejs.org.
 
 ## Lokální spuštění
 
@@ -55,7 +55,7 @@ npm run dev          # admin: http://localhost:4321/admin/
 git config user.name "Vaše Jméno"
 git config user.email "vas@email.cz"
 git add .
-git commit -m "Iniciální skeleton: Astro + Sveltia CMS + Netlify"
+git commit -m "Moderní web: Astro + Sveltia CMS + Netlify"
 git remote add origin https://github.com/lvareka/doucimkv.git
 git branch -M main
 git push -u origin main
@@ -93,28 +93,37 @@ ve fázi implementace.)*
 
 ## 4) Formuláře (Netlify Forms)
 
-Kontaktní a rezervační formulář přidáme do stránek ve fázi implementace. Netlify je
-registruje automaticky ze statického HTML (`data-netlify="true"`). Odeslání se ukládají
-v Netlify a přeposílají na e-mail (*Forms → Notifications*).
+Na stránce Kontakt jsou dva formuláře: **rezervace termínu** a **kontaktní formulář**.
+Netlify je registruje automaticky ze statického HTML (`data-netlify="true"`). Odeslání
+se ukládají v Netlify a přeposílají na e-mail – nastavte v *Forms → Notifications*.
+Po odeslání se zobrazí stránka `/dekujeme`.
 
 ## 5) SEO – co je připraveno a co doplnit
 
-Připraveno: `lang="cs"`, meta popisy, `robots.txt`, vlastní doména/SSL.
-Doplnit ve fázi implementace:
-- `@astrojs/sitemap` + `sitemap-index.xml`
-- JSON-LD: `Person` + `Service` + `Offer` + `FAQPage` (+ `areaServed: Karlovy Vary`)
-- Open Graph obrázek, interní prolinkování, klíčová slova
-- Po spuštění **odstranit** `<meta name="robots" content="noindex" />` v `BaseLayout.astro`
-- **Mimo kód:** založit Google Business Profile (Moje firma), zápisy Firmy.cz / Mapy.cz
+Hotovo:
+- `lang="cs"`, unikátní `title`/`description`, canonical, Open Graph, `robots.txt`
+- sitemap (`@astrojs/sitemap`) → `/sitemap-index.xml`
+- JSON-LD: `EducationalOrganization` + `Person` + `Service` + `Offer` + `FAQPage` (areaServed: Karlovy Vary)
+- responzivní design, rychlý statický výstup
+
+Zbývá (mimo kód – pro dosažení #1):
+- **Google Business Profile** (Moje firma na Googlu) – klíčové pro lokální SEO
+- Zápisy v katalozích (Firmy.cz, Mapy.cz, NajdiUcitele.cz), konzistentní NAP
+- Zpětné odkazy a recenze
+- Volitelně Open Graph obrázek (1200×630)
 
 ## Struktura
 
 ```
-astro.config.mjs        # konfigurace Astro (site = URL webu)
+astro.config.mjs        # konfigurace Astro (site = URL webu) + sitemap
 netlify.toml            # build příkazy pro Netlify
 public/admin/           # Sveltia CMS (index.html + config.yml)
 public/robots.txt
-src/layouts/            # BaseLayout.astro
-src/pages/index.astro   # úvodní stránka (skeleton)
-src/content/            # obsah pro CMS (nastaveni, faq, aktuality, pages/*.md)
+public/favicon.svg
+src/styles/global.css   # design systém
+src/layouts/            # BaseLayout.astro (hlavička, patička, <head>, JSON-LD)
+src/components/         # Header, Footer, Cta
+src/pages/              # index, forma, cenik, pravidla, faq, kontakt, dekujeme
+src/content/pages/*.md  # editovatelné texty stránek (CMS)
+src/data/*.json         # kontakt/ceny, FAQ, aktuality (CMS)
 ```

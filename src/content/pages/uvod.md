@@ -1,13 +1,8 @@
 ---
 title: "Doučování matematiky a fyziky – Karlovy Vary | RNDr. Petr Vařeka"
-description: "Doučování matematiky a fyziky (ZŠ, SŠ, VŠ) v Karlových Varech a online. Absolvent MFF UK, 15+ let praxe. Prezenčně 300 Kč/hod, distančně 350 Kč/hod."
+description: "Doučování matematiky a fyziky (ZŠ, SŠ, VŠ) v Karlových Varech a online. Absolvent MFF UK, 15+ let praxe."
 ---
 
-# Doučování matematiky a fyziky (ZŠ, SŠ a VŠ)
+Matematika a fyzika patří mezi předměty, které nejdou „nabiflovat" – je třeba jim porozumět. Proto je nejlepší formou výuky **konzultace**: přijdete s konkrétními otázkami nebo příklady a společně je projdeme.
 
-Počítání příkladů na zakázku. Více než 15 let praxe. Absolvent Matematicko-fyzikální
-fakulty UK. Trpělivé vysvětlování a vstřícný přístup i k těm, kteří matematiku chápou
-jako „nutné zlo".
-
-- Prezenčně v Karlových Varech (v dosahu MHD) – 300 Kč / hod.
-- Distančně přes WhatsApp – 350 Kč / hod.
+Mám více než 15 let praxe a jsem absolventem Matematicko-fyzikální fakulty Univerzity Karlovy. Mám pochopení i pro ty, kdo berou matematiku jako „nutné zlo" – cílem je, abyste látku skutečně pochopili a u zkoušky si věděli rady.

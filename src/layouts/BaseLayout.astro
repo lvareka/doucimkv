@@ -1,0 +1,29 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = 'Doučování matematiky a fyziky – Karlovy Vary',
+  description = 'Doučování matematiky a fyziky (ZŠ, SŠ, VŠ) v Karlových Varech a online. RNDr. Petr Vařeka, absolvent MFF UK, 15+ let praxe.',
+} = Astro.props;
+---
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {/* SKELETON: noindex, dokud web není hotový – při spuštění odstranit */}
+    <meta name="robots" content="noindex" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <meta property="og:locale" content="cs_CZ" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

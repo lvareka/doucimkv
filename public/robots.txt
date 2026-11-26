@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Disallow admin (CMS)
+Disallow: /admin/
+
+# Sitemap doplníme ve fázi SEO (plugin @astrojs/sitemap)
+Sitemap: https://doucimkv.netlify.app/sitemap-index.xml

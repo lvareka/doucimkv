@@ -1,0 +1,106 @@
+backend:
+  name: github
+  repo: "lvareka/doucimkv"
+  branch: main
+  base_url: "" # TODO: URL OAuth (viz README, sekce "CMS – přihlášení")
+  commit_messages:
+    create: "obsah: přidáno {{collection}} „{{slug}}“"
+    update: "obsah: upraveno {{collection}} „{{slug}}“"
+    delete: "obsah: smazáno {{collection}} „{{slug}}“"
+    uploadMedia: "média: nahráno {{path}}"
+    deleteMedia: "média: smazáno {{path}}"
+
+# Umožní editaci na localhostu přes `npx decap-server`
+local_backend: true
+
+media_folder: "public/images"
+public_folder: "/images"
+locale: cs
+site_url: "https://doucimkv.netlify.app" # TODO: skutečná adresa
+display_url: "https://doucimkv.netlify.app"
+
+collections:
+  - name: nastaveni
+    label: "Nastavení (kontakt a ceny)"
+    files:
+      - name: site
+        label: "Kontakt a ceny"
+        file: "src/content/nastaveni.json"
+        fields:
+          - { name: jmeno, label: "Jméno a titul", widget: string }
+          - { name: telefon, label: "Telefon", widget: string }
+          - { name: email, label: "E-mail", widget: string }
+          - { name: adresa, label: "Adresa", widget: string }
+          - { name: ucet, label: "Číslo účtu (platby)", widget: string }
+          - { name: cena_prezencni, label: "Cena prezenčně (Kč / 60 min)", widget: number, value_type: int }
+          - { name: cena_distancni, label: "Cena distančně (Kč / 60 min)", widget: number, value_type: int }
+          - { name: distancni_nastroj, label: "Nástroj pro distanční výuku", widget: string }
+
+  - name: stranky
+    label: "Stránky"
+    files:
+      - name: uvod
+        label: "Úvod"
+        file: "src/content/pages/uvod.md"
+        fields:
+          - { name: title, label: "Titulek (SEO)", widget: string }
+          - { name: description, label: "Popis (meta)", widget: text }
+          - { name: body, label: "Obsah", widget: markdown }
+      - name: forma
+        label: "Forma doučování"
+        file: "src/content/pages/forma.md"
+        fields:
+          - { name: title, label: "Titulek (SEO)", widget: string }
+          - { name: description, label: "Popis (meta)", widget: text }
+          - { name: body, label: "Obsah", widget: markdown }
+      - name: pravidla
+        label: "Pravidla komunikace"
+        file: "src/content/pages/pravidla.md"
+        fields:
+          - { name: title, label: "Titulek (SEO)", widget: string }
+          - { name: description, label: "Popis (meta)", widget: text }
+          - { name: body, label: "Obsah", widget: markdown }
+      - name: cenik
+        label: "Ceník"
+        file: "src/content/pages/cenik.md"
+        fields:
+          - { name: title, label: "Titulek (SEO)", widget: string }
+          - { name: description, label: "Popis (meta)", widget: text }
+          - { name: body, label: "Obsah", widget: markdown }
+      - name: kontakt
+        label: "Kontakt"
+        file: "src/content/pages/kontakt.md"
+        fields:
+          - { name: title, label: "Titulek (SEO)", widget: string }
+          - { name: description, label: "Popis (meta)", widget: text }
+          - { name: body, label: "Obsah", widget: markdown }
+
+  - name: faq
+    label: "FAQ (časté dotazy)"
+    files:
+      - name: faq
+        label: "Otázky a odpovědi"
+        file: "src/content/faq.json"
+        fields:
+          - name: items
+            label: "Otázky"
+            widget: list
+            fields:
+              - { name: otazka, label: "Otázka", widget: string }
+              - { name: odpoved, label: "Odpověď", widget: text }
+
+  - name: aktuality
+    label: "Aktuality / oznámení"
+    files:
+      - name: aktuality
+        label: "Oznámení"
+        file: "src/content/aktuality.json"
+        fields:
+          - name: items
+            label: "Oznámení"
+            widget: list
+            fields:
+              - { name: datum, label: "Datum (např. 1. 10. 2025)", widget: string }
+              - { name: titulek, label: "Titulek", widget: string }
+              - { name: text, label: "Text", widget: text }
+              - { name: zobrazit, label: "Zobrazit na webu", widget: boolean, default: true }

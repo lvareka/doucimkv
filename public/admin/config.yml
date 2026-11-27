@@ -2,7 +2,7 @@ backend:
   name: github
   repo: "lvareka/doucimkv"
   branch: main
-  base_url: "" # TODO: URL OAuth (viz README, sekce "CMS – přihlášení")
+  base_url: "https://doucimkv.netlify.app" # OAuth proxy: Edge Function v netlify/edge-functions/oauth.js
   commit_messages:
     create: "obsah: přidáno {{collection}} „{{slug}}“"
     update: "obsah: upraveno {{collection}} „{{slug}}“"

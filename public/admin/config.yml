@@ -115,8 +115,9 @@ collections:
           - name: items
             label: "Otázky"
             widget: list
-            summary: "{{fields.otazka}}"
+            summary: "{{fields.uroven}} · {{fields.otazka}}"
             fields:
+              - { name: uroven, label: "Úroveň", widget: select, options: ["ZŠ", "SŠ", "VŠ"], default: "SŠ" }
               - { name: otazka, label: "Otázka", widget: string }
               - name: moznosti
                 label: "Možnosti odpovědí"

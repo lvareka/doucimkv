@@ -78,19 +78,20 @@ git push -u origin main
 
 ## 3) CMS – přihlášení (GitHub OAuth)
 
-`repo` v `public/admin/config.yml` je už nastavené na `lvareka/doucimkv`.
-Pro přihlášení do `/admin` je potřeba OAuth proxy (zdarma):
+`repo` v `public/admin/config.yml` je nastavené na `lvareka/doucimkv`. Přihlášení do
+`/admin` zajišťuje OAuth proxy, kterou tento repozitář obsahuje jako **Netlify Edge
+Function** (`netlify/edge-functions/oauth.js`) – není potřeba Cloudflare ani Jiný účet.
 
-**Doporučeno – `sveltia-cms-auth` (Cloudflare Worker, free):**
 1. Vytvořte **GitHub OAuth App** (*GitHub → Settings → Developer settings → OAuth Apps*):
-   - Homepage URL: `https://<vas-web>.netlify.app`
-   - Authorization callback URL: URL workeru z kroku 2
-2. Nasaďte `https://github.com/sveltia/sveltia-cms-auth` tlačítkem *Deploy to Cloudflare*.
-3. Do workeru nastavte `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, `ALLOWED_DOMAINS`.
-4. URL workeru vložte do `base_url` v `public/admin/config.yml`.
+   - Homepage URL: `https://doucimkv.netlify.app`
+   - Authorization callback URL: `https://doucimkv.netlify.app/callback`
+2. V Netlify nastavte proměnné prostředí `GITHUB_CLIENT_ID` a `GITHUB_CLIENT_SECRET`
+   (volitelně `ALLOWED_DOMAINS`). Po změně proměnných je nutný **nový produkční deploy**,
+   aby se Edge Function překreslila s aktuálními hodnotami.
+3. `base_url` v `public/admin/config.yml` už míří na `https://doucimkv.netlify.app`
+   (stejná adresa jako web).
 
-*(Alternativa bez Cloudflare: malá Netlify Function pro OAuth v tomto repu – doplníme
-ve fázi implementace.)*
+Adresy proxy: `/auth` (přesměruje na GitHub), `/callback` (výměna kódu za token).
 
 ## 4) Formuláře (Netlify Forms)
 
@@ -113,18 +114,39 @@ Zbývá (mimo kód – pro dosažení #1):
 - Zpětné odkazy a recenze
 - Volitelně Open Graph obrázek (1200×630)
 
+## 6) Starý web (doucimkv.wz.cz) a přesměrování
+
+Starý web běží na WZ hostingu (HTTP i port 8080). Aby návštěvníci i vyhledávače
+přecházeli na novou verzi, přidejte do `.htaccess` ve složce `web` na WZ tyto přesměrování:
+
+```apache
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^(www\.)?doucimkv\.wz\.cz(:8080)?$ [NC]
+RewriteRule ^forma\.html$ https://doucimkv.netlify.app/forma/ [R=301,L]
+RewriteRule ^podminky\.html$ https://doucimkv.netlify.app/pravidla/ [R=301,L]
+RewriteRule ^cenik\.html$ https://doucimkv.netlify.app/cenik/ [R=301,L]
+RewriteRule ^kontakt\.html$ https://doucimkv.netlify.app/kontakt/ [R=301,L]
+RewriteRule ^(index\.html)?$ https://doucimkv.netlify.app/ [R=301,L]
+RewriteRule ^ https://doucimkv.netlify.app/ [R=301,L]
+```
+
+> ⚠️ Ve starém `forma.html` je zakomentovaný PHP blok s přihlašovacími údaji k databázi
+> a soubor je veřejně dostupný. Po nasměrování ho z hostingu smažte a heslo změňte,
+> pokud se ještě někde používá.
+
 ## Struktura
 
 ```
 astro.config.mjs        # konfigurace Astro (site = URL webu) + sitemap
 netlify.toml            # build příkazy pro Netlify
+netlify/edge-functions/ # OAuth proxy pro CMS (bez Cloudflare)
 public/admin/           # Sveltia CMS (index.html + config.yml)
 public/robots.txt
 public/favicon.svg
 src/styles/global.css   # design systém
 src/layouts/            # BaseLayout.astro (hlavička, patička, <head>, JSON-LD)
-src/components/         # Header, Footer, Cta
-src/pages/              # index, forma, cenik, kviz, pravidla, faq, kontakt, dekujeme
+src/components/         # Header, Footer, Cta, Quiz
+src/pages/              # index, forma, cenik, kviz, pravidla, faq, kontakt, dekujeme, soukromi
 src/content/pages/*.md  # editovatelné texty stránek (CMS)
 src/data/*.json         # kontakt/ceny, FAQ, aktuality, kvíz, příklady, zajímavosti (CMS)
 ```

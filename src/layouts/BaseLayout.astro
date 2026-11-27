@@ -23,10 +23,12 @@ const canonical = new URL(Astro.url.pathname, siteUrl).href;
 const orgSchema = {
   '@context': 'https://schema.org',
   '@type': 'EducationalOrganization',
+  '@id': new URL('/#organizace', siteUrl).href,
   name: 'Doučování matematiky a fyziky – RNDr. Petr Vařeka',
   url: siteUrl.href,
   email: 'petrvareka@seznam.cz',
   telephone: '+420774195713',
+  priceRange: '300–350 Kč/h',
   areaServed: { '@type': 'City', name: 'Karlovy Vary' },
   address: {
     '@type': 'PostalAddress',
@@ -35,6 +37,11 @@ const orgSchema = {
     postalCode: '360 05',
     addressCountry: 'CZ',
   },
+  geo: { '@type': 'GeoCoordinates', latitude: 50.2397597, longitude: 12.8534502 },
+  hasMap: 'https://www.google.com/maps/search/?api=1&query=Kone%C4%8Dn%C3%A1+897%2F9%2C+360+05+Karlovy+Vary',
+  sameAs: [
+    'https://www.google.com/maps/place/Kone%C4%8Dn%C3%A1+897%2F9,+360+05+Karlovy+Vary,+%C4%8Cesk%C3%A1+republika/@50.2397597,12.8534502,17z',
+  ],
   founder: {
     '@type': 'Person',
     name: 'Petr Vařeka',

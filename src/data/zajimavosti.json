@@ -2,15 +2,19 @@
   "items": [
     {
       "titulek": "Proč je 0! = 1?",
-      "text": "Faktoriál nuly je definován jako 1, aby platila pravidla kombinatoriky – počet způsobů, jak uspořádat prázdnou množinu, je právě jeden."
+      "text": "Faktoriál nuly je definován jako 1, aby platila pravidla kombinatoriky – počet způsobů, jak uspořádat prázdnou množinu, je právě jeden. Díky tomu funguje i vztah n! = n · (n − 1)! pro n = 1."
     },
     {
-      "titulek": "Nekonečno není číslo",
-      "text": "Symbol ∞ označuje nekonečno, ale v běžné aritmetice to není číslo – nelze s ním počítat jako s ostatními čísly."
+      "titulek": "Proč 0,999… = 1?",
+      "text": "Nejde o zaokrouhlení – obě čísla jsou přesně stejná. Pokud x = 0,999…, pak 10x = 9,999… a po odečtení x dostaneme 9x = 9, tedy x = 1."
     },
     {
       "titulek": "Zlatý řez",
-      "text": "Poměr zlatého řezu (φ ≈ 1,618) se objevuje v geometrii, umění i přírodě."
+      "text": "Poměr zlatého řezu φ ≈ 1,618 se objevuje v geometrii (pravidelný pětiúhelník), v umění i v přírodě. Splňuje rovnici φ² = φ + 1."
+    },
+    {
+      "titulek": "Eulerova identita",
+      "text": "Eulerova identita e^(iπ) + 1 = 0 spojuje v jediném vztahu pět klíčových konstant: e, i, π, 1 a 0. Proto ji mnozí matematici považují za nejkrásnější rovnici vůbec."
     }
   ]
 }

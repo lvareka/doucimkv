@@ -1,31 +1,103 @@
 {
   "items": [
     {
-      "otazka": "Kolik je 7 × 8?",
+      "uroven": "ZŠ",
+      "otazka": "Ve třídě je 28 žáků, z toho 3/7 tvoří dívky. Kolik je ve třídě chlapců?",
       "moznosti": [
-        { "text": "54", "spravna": false },
-        { "text": "56", "spravna": true },
-        { "text": "58", "spravna": false }
+        { "text": "12", "spravna": false },
+        { "text": "14", "spravna": false },
+        { "text": "16", "spravna": true },
+        { "text": "18", "spravna": false }
       ],
-      "vysvetleni": "7 × 8 = 56 (malá násobilka)."
+      "vysvetleni": "Dívek je 3/7 z 28 = 12. Chlapců je tedy 28 − 12 = 16."
     },
     {
-      "otazka": "Jaká je hodnota 2³ (dvě na třetí)?",
+      "uroven": "ZŠ",
+      "otazka": "Bunda po slevě 20 % stojí 1 200 Kč. Kolik stála před slevou?",
       "moznosti": [
+        { "text": "1 400 Kč", "spravna": false },
+        { "text": "1 440 Kč", "spravna": false },
+        { "text": "1 500 Kč", "spravna": true },
+        { "text": "1 600 Kč", "spravna": false }
+      ],
+      "vysvetleni": "Po slevě 20 % zbývá 80 % ceny: 0,8 · x = 1 200, tedy x = 1 200 : 0,8 = 1 500 Kč."
+    },
+    {
+      "uroven": "ZŠ",
+      "otazka": "Obdélníková zahrada má obvod 38 m a délku 12 m. Jaká je její šířka?",
+      "moznosti": [
+        { "text": "6 m", "spravna": false },
+        { "text": "7 m", "spravna": true },
+        { "text": "13 m", "spravna": false },
+        { "text": "14 m", "spravna": false }
+      ],
+      "vysvetleni": "Obvod obdélníku je 2 · (a + b) = 38, takže a + b = 19. Pro a = 12 je b = 7 m."
+    },
+    {
+      "uroven": "SŠ",
+      "otazka": "Rovnice x² − 5x + 6 = 0 má kořeny 2 a 3. Jaký je jejich součet? (Bez počítání – použijte Viètovy vztahy.)",
+      "moznosti": [
+        { "text": "−5", "spravna": false },
+        { "text": "1", "spravna": false },
+        { "text": "5", "spravna": true },
+        { "text": "6", "spravna": false }
+      ],
+      "vysvetleni": "Podle Viètových vztahů je součet kořenů −b/a = 5 (a součin c/a = 6)."
+    },
+    {
+      "uroven": "SŠ",
+      "otazka": "Jaká je hodnota výrazu log₂ 8 + log₃ 9?",
+      "moznosti": [
+        { "text": "4", "spravna": false },
+        { "text": "5", "spravna": true },
         { "text": "6", "spravna": false },
-        { "text": "8", "spravna": true },
-        { "text": "9", "spravna": false }
+        { "text": "17", "spravna": false }
       ],
-      "vysvetleni": "2³ = 2 · 2 · 2 = 8."
+      "vysvetleni": "log₂ 8 = 3 (2³ = 8) a log₃ 9 = 2 (3² = 9). Součet je 3 + 2 = 5."
     },
     {
-      "otazka": "Které z čísel je prvočíslo?",
+      "uroven": "SŠ",
+      "otazka": "Vrchol paraboly dané funkcí f(x) = x² − 4x + 3 leží v bodě:",
       "moznosti": [
-        { "text": "21", "spravna": false },
-        { "text": "27", "spravna": false },
-        { "text": "29", "spravna": true }
+        { "text": "[2; −1]", "spravna": true },
+        { "text": "[−2; −1]", "spravna": false },
+        { "text": "[2; 3]", "spravna": false },
+        { "text": "[4; 3]", "spravna": false }
       ],
-      "vysvetleni": "29 je prvočíslo (21 = 3 · 7, 27 = 3 · 9)."
+      "vysvetleni": "Souřadnice vrcholu: x = −b/(2a) = 4/2 = 2, f(2) = 4 − 8 + 3 = −1. Vrchol je [2; −1]."
+    },
+    {
+      "uroven": "VŠ",
+      "otazka": "Jaká je hodnota limity lim (x → 0) sin(3x)/x?",
+      "moznosti": [
+        { "text": "0", "spravna": false },
+        { "text": "1", "spravna": false },
+        { "text": "3", "spravna": true },
+        { "text": "Limita neexistuje", "spravna": false }
+      ],
+      "vysvetleni": "Vytkneme 3: sin(3x)/x = 3 · sin(3x)/(3x). Protože sin(t)/t → 1 pro t → 0, je limita 3 · 1 = 3."
+    },
+    {
+      "uroven": "VŠ",
+      "otazka": "Vypočítejte určitý integrál ∫₀¹ 3x² dx.",
+      "moznosti": [
+        { "text": "1/2", "spravna": false },
+        { "text": "3/4", "spravna": false },
+        { "text": "1", "spravna": true },
+        { "text": "3", "spravna": false }
+      ],
+      "vysvetleni": "Primitivní funkce k 3x² je x³. Dosadíme meze: [x³]₀¹ = 1³ − 0³ = 1."
+    },
+    {
+      "uroven": "VŠ",
+      "otazka": "Házíme dvěma kostkami. Jaká je pravděpodobnost, že součet padne právě 7?",
+      "moznosti": [
+        { "text": "1/6", "spravna": true },
+        { "text": "1/9", "spravna": false },
+        { "text": "1/12", "spravna": false },
+        { "text": "7/36", "spravna": false }
+      ],
+      "vysvetleni": "Součet 7 nastane v 6 z 36 stejně pravděpodobných případů: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1). P = 6/36 = 1/6."
     }
   ]
 }

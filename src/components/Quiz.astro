@@ -2,28 +2,44 @@
 import kviz from '../data/kviz.json';
 
 const items = kviz.items ?? [];
+const order = ['ZŠ', 'SŠ', 'VŠ'];
+const levels = order
+  .map((level) => ({ level, items: items.filter((q) => q.uroven === level) }))
+  .concat([{ level: 'Další', items: items.filter((q) => !order.includes(q.uroven)) }])
+  .filter((group) => group.items.length > 0);
+
+let counter = 0;
+const groups = levels.map((group) => ({
+  level: group.level,
+  items: group.items.map((q) => ({ ...q, cislo: ++counter })),
+}));
 ---
 {items.length === 0 ? (
   <div class="empty">Zatím zde nejsou žádné otázky – brzy je doplníme.</div>
 ) : (
   <form class="quiz" data-quiz>
-    {items.map((q, qi) => {
-      const correct = q.moznosti.findIndex((o) => o.spravna);
-      return (
-        <fieldset class="quiz__q" data-correct={correct}>
-          <legend>
-            {qi + 1}. {q.otazka}
-          </legend>
-          {q.moznosti.map((o, oi) => (
-            <label class="quiz__opt">
-              <input type="radio" name={`q${qi}`} value={oi} />
-              <span>{o.text}</span>
-            </label>
-          ))}
-          {q.vysvetleni ? <p class="quiz__explain" hidden>{q.vysvetleni}</p> : null}
-        </fieldset>
-      );
-    })}
+    {groups.map((group) => (
+      <div class="quiz__group">
+        <h3 class="quiz__level">{group.level}</h3>
+        {group.items.map((q) => {
+          const correct = q.moznosti.findIndex((o) => o.spravna);
+          return (
+            <fieldset class="quiz__q" data-correct={correct}>
+              <legend>
+                {q.cislo}. {q.otazka}
+              </legend>
+              {q.moznosti.map((o, oi) => (
+                <label class="quiz__opt">
+                  <input type="radio" name={`q${q.cislo}`} value={oi} />
+                  <span>{o.text}</span>
+                </label>
+              ))}
+              {q.vysvetleni ? <p class="quiz__explain" hidden>{q.vysvetleni}</p> : null}
+            </fieldset>
+          );
+        })}
+      </div>
+    ))}
     <div class="quiz__actions">
       <button type="submit" class="btn btn--primary">Vyhodnotit</button>
       <button type="button" class="btn btn--ghost" data-reset hidden>Zkusit znovu</button>
@@ -69,8 +85,9 @@ const items = kviz.items ?? [];
       });
 
       if (result) {
+        const percent = Math.round((score / questions.length) * 100);
         result.removeAttribute('hidden');
-        result.textContent = `Výsledek: ${score} z ${questions.length} správně.`;
+        result.textContent = `Výsledek: ${score} z ${questions.length} správně (${percent} %).`;
       }
       if (reset) reset.removeAttribute('hidden');
     });

@@ -196,6 +196,9 @@ p { margin: 0 0 1rem; }
 
 /* ===== Quiz ===== */
 .quiz { display: grid; gap: 1rem; max-width: 780px; }
+.quiz__group { display: grid; gap: 1rem; }
+.quiz__level { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--brand); margin: 0.9rem 0 0; }
+.quiz__group:first-child .quiz__level { margin-top: 0; }
 .quiz__q { border: 1px solid var(--line); border-radius: var(--radius); background: #fff; padding: 1rem 1.2rem 1.1rem; box-shadow: var(--shadow-sm); margin: 0; }
 .quiz__q legend { font-weight: 700; color: var(--ink); padding: 0 0.35rem; }
 .quiz__opt { display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 0.6rem; border-radius: 8px; cursor: pointer; color: var(--ink-soft); }

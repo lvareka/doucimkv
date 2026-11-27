@@ -1,14 +1,24 @@
 {
   "items": [
     {
-      "tema": "Lineární rovnice",
-      "zadani": "Vyřešte rovnici: 2x + 6 = 14",
-      "reseni": "2x = 14 − 6 = 8\nx = 4\nZkouška: 2 · 4 + 6 = 14 ✓"
+      "tema": "ZŠ – objem a jednotky",
+      "zadani": "Bazén má tvar kvádru o rozměrech 25 m × 10 m a hloubku 2 m. Kolik hektolitrů vody se do něj vejde?",
+      "reseni": "Objem: V = 25 · 10 · 2 = 500 m³.\nPřevod: 1 m³ = 1 000 l = 10 hl.\nV = 500 · 10 = 5 000 hl (tj. 500 000 litrů)."
     },
     {
-      "tema": "Geometrie",
-      "zadani": "Vypočítejte obsah obdélníku o stranách 5 cm a 3 cm.",
-      "reseni": "S = a · b = 5 · 3 = 15 cm²"
+      "tema": "SŠ – rovnice s absolutní hodnotou",
+      "zadani": "Řešte v oboru reálných čísel: x² − 4|x| − 5 = 0",
+      "reseni": "Zavedeme substituci t = |x|, t ≥ 0:\nt² − 4t − 5 = 0\n(t − 5)(t + 1) = 0\nt = 5, nebo t = −1 (nevyhovuje, protože t ≥ 0).\nZbývá |x| = 5, tedy x = 5 nebo x = −5.\nZkouška: 25 − 20 − 5 = 0 ✓"
+    },
+    {
+      "tema": "SŠ – aritmetická posloupnost",
+      "zadani": "V aritmetické posloupnosti je a₃ = 7 a a₇ = 19. Určete diferenci a první člen.",
+      "reseni": "Rozdíl členů: a₇ − a₃ = 4d = 19 − 7 = 12, tedy d = 3.\nPrvní člen: a₁ = a₃ − 2d = 7 − 6 = 1.\nKontrola: 1, 4, 7, 10, 13, 16, 19 ✓"
+    },
+    {
+      "tema": "VŠ – limita funkce",
+      "zadani": "Vypočítejte limitu lim (x → ∞) (3x² + 2x) / (x² − 5).",
+      "reseni": "Vydělíme čitatele i jmenovatele x²:\n(3 + 2/x) / (1 − 5/x²).\nPro x → ∞ jdou 2/x i 5/x² k nule, proto je limita 3/1 = 3."
     }
   ]
 }

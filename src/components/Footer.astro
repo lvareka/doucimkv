@@ -1,5 +1,8 @@
 ---
+import nastaveni from '../data/nastaveni.json';
+
 const year = new Date().getFullYear();
+const tel = `tel:+420${nastaveni.telefon.replace(/\s/g, '')}`;
 ---
 <footer class="site-footer">
   <div class="container">
@@ -28,8 +31,8 @@ const year = new Date().getFullYear();
       <div>
         <h4>Kontakt</h4>
         <ul>
-          <li><a href="tel:+420774195713">774 195 713</a></li>
-          <li><a href="mailto:petrvareka@seznam.cz">petrvareka@seznam.cz</a></li>
+          <li><a href={tel}>{nastaveni.telefon}</a></li>
+          <li><a href={`mailto:${nastaveni.email}`}>{nastaveni.email}</a></li>
           <li>Konečná 897/9<br />360 05 Karlovy Vary</li>
         </ul>
       </div>

@@ -6,6 +6,13 @@ Decap CMS) + **Netlify**. Web je **hotový**: moderní responzivní design, pln�
 s příklady a zajímavostmi, formuláře (Netlify Forms), FAQ a SEO (sitemap, JSON-LD, meta).
 Obsah lze pohodlně upravovat v prohlížeči přes CMS.
 
+## Dokumentace
+
+- [Handover – nasazení a provoz](docs/NASADENI.md) – jak web nasadit a spravovat sami,
+  včetně krokového postupu po obnovení kreditů Netlify (25. 12.)
+- [SEO a viditelnost](docs/SEO.md) – konkrétní plán: Google Business Profile, katalogy,
+  Search Console, recenze a zpětné odkazy
+
 ## Je to zdarma?
 
 | Služba | Zdarma? | Poznámka |

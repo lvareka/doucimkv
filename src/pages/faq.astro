@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Cta from '../components/Cta.astro';
 import faq from '../data/faq.json';
+import nastaveni from '../data/nastaveni.json';
 
 const items = faq.items ?? [];
 const faqSchema = {
@@ -24,7 +25,7 @@ const faqSchema = {
       <div class="section-head center">
         <p class="eyebrow">Časté dotazy</p>
         <h1>Časté dotazy</h1>
-        <p class="lead">Nenašli jste odpověď? <a href="/kontakt">Napište mi</a> nebo zavolejte na 774 195 713.</p>
+        <p class="lead">Nenašli jste odpověď? <a href="/kontakt">Napište mi</a> nebo zavolejte na {nastaveni.telefon}.</p>
       </div>
       <div class="faq">
         {items.map((f) => (

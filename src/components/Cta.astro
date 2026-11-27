@@ -1,4 +1,6 @@
 ---
+import nastaveni from '../data/nastaveni.json';
+
 interface Props {
   title?: string;
   text?: string;
@@ -7,6 +9,7 @@ const {
   title = 'Domluvme se na termínu',
   text = 'Zavolejte, napište e-mail, nebo vyplňte rezervační formulář. Ozvu se vám co nejdříve.',
 } = Astro.props;
+const tel = `tel:+420${nastaveni.telefon.replace(/\s/g, '')}`;
 ---
 <section class="section">
   <div class="container">
@@ -15,7 +18,7 @@ const {
       <p>{text}</p>
       <div class="cta__actions">
         <a class="btn btn--primary" href="/kontakt#rezervace">Rezervovat termín</a>
-        <a class="btn btn--ghost" href="tel:+420774195713">Zavolat 774 195 713</a>
+        <a class="btn btn--ghost" href={tel}>Zavolat {nastaveni.telefon}</a>
       </div>
     </div>
   </div>

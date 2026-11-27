@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import nastaveni from '../data/nastaveni.json';
 
 interface Props {
   title?: string;
@@ -12,7 +13,7 @@ interface Props {
 
 const {
   title = 'Doučování matematiky a fyziky – Karlovy Vary | RNDr. Petr Vařeka',
-  description = 'Doučování matematiky a fyziky (ZŠ, SŠ, VŠ) v Karlových Varech a online. Absolvent MFF UK, 15+ let praxe. Prezenčně 300 Kč/hod, distančně 350 Kč/hod.',
+  description = `Doučování matematiky a fyziky (ZŠ, SŠ, VŠ) v Karlových Varech a online. Absolvent MFF UK, 15+ let praxe. Prezenčně ${nastaveni.cena_prezencni} Kč/hod, distančně ${nastaveni.cena_distancni} Kč/hod.`,
   schema = [],
   noindex = false,
 } = Astro.props;
@@ -26,8 +27,8 @@ const orgSchema = {
   '@id': new URL('/#organizace', siteUrl).href,
   name: 'Doučování matematiky a fyziky – RNDr. Petr Vařeka',
   url: siteUrl.href,
-  email: 'petrvareka@seznam.cz',
-  telephone: '+420774195713',
+  email: nastaveni.email,
+  telephone: `+420${nastaveni.telefon.replace(/\s/g, '')}`,
   priceRange: '300–350 Kč/h',
   areaServed: { '@type': 'City', name: 'Karlovy Vary' },
   address: {
